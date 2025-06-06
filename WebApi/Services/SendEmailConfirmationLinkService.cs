@@ -6,7 +6,7 @@ public class SendEmailConfirmationLinkService(ISendEmailService sendEmailService
 {
     private readonly ISendEmailService _sendEmailService = sendEmailService;
     private readonly string _clientWebSiteUrl = configuration["ClientWebsiteUrl"];
-    public void SendConfirmationLink(string email, string token)
+    public void SendConfirmationLink(string email, string token) 
     {
         string textContent = $"Please copy this link {_clientWebSiteUrl}/confirm-email?email={email}&token={token} into your browser to confirm your email";
         string htmlContent = GetHtmlContent(email, token);
