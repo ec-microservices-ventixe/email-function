@@ -16,6 +16,6 @@ builder.Services
 
 builder.Services.AddSingleton(x => new EmailClient(builder.Configuration["ACS_ConnectionString"]));
 builder.Services.AddSingleton<ISendEmailService, SendEmailService>();
-builder.Services.AddSingleton<ISendEmailConfirmationLinkService, SendEmailConfirmationLinkService>();
+builder.Services.AddSingleton<ISendEmailConfirmationLinkService, SendEmailConfirmationLinkService>(); 
 
 builder.Build().Run();
