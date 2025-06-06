@@ -1,7 +1,9 @@
 ﻿
 using Azure.Messaging.ServiceBus;
+using Google.Protobuf.Reflection;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using System.Text.Json;
 using WebApi.Interfaces;
 using WebApi.Models;
@@ -12,12 +14,18 @@ public class SendEmailConfirmation(ISendEmailConfirmationLinkService sendConfirm
 {
     private readonly ISendEmailConfirmationLinkService _sendConfirmationService = sendConfirmationService;
     private readonly IConfiguration _config = config;
+    private readonly ILogger<SendEmailConfirmation> _logger;
 
     [Function("SendEmailConfirmation")]
-    public void Run(
+    public async Task Run(
         [ServiceBusTrigger("validate-email-queue", Connection = "ACS_ConnectionString")] 
-        ServiceBusReceivedMessage message)
+        ServiceBusReceivedMessage message,
+        ServiceBusMessageActions messageActions)
     {
+        _logger.LogInformation("Message ID: {id}", message.MessageId);
+        _logger.LogInformation("Message Body: {body}", message.Body.ToString());
+        _logger.LogInformation("Message Content-Type: {contentType}", message.ContentType);
+        await messageActions.CompleteMessageAsync(message);
         var deserializedMsg = message.Body.ToObjectFromJson<ValidateEmailMessage>();
         if (deserializedMsg is not null)
         {

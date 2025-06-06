@@ -17,7 +17,7 @@ public class Function1
 
     [Function(nameof(Function1))]
     public async Task Run(
-        [ServiceBusTrigger("validate-email-queue", Connection = "Endpoint=sb://ventixe-servicebus-service.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=x6+JBbQCwdoTkf4FEb1LmrxPo0EZfniVi+ASbOolw58=")]
+        [ServiceBusTrigger("validate-email-queue", Connection = "k")]
         ServiceBusReceivedMessage message,
         ServiceBusMessageActions messageActions)
     {
