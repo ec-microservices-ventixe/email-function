@@ -31,7 +31,7 @@ public class SendEmailConfirmationLinkService(ISendEmailService sendEmailService
                     </tr>
                     <tr>
                       <td align=""center"" style=""padding: 20px;"">
-                        <a href=""{_clientWebSiteUrl}?email={email}&token={token}"" 
+                        <a href=""{_clientWebSiteUrl}/confirm-email?email={email}&token={token}"" 
                            style=""background-color:#f26cf9; color:#eeefff; padding:12px 24px; text-decoration:none; border-radius:5px; display:inline-block; font-weight:bold;"">
                           Confirm Email
                         </a>
